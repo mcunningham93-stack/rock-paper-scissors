@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<header>
+    <meta charset="UTF-8">
+    <title>Rock Paper Scissors</title>
+    
+</header>
+
+<body>
+
+    <script>
+
+console.log(game());
+
+
+    function game(computerScore, userScore, score) {
+
+        var userScore = 0;
+        var computerScore = 0;
+
+        for (let i=1; i<=5; i++) {
+            let outcome = playRound();
+
+            if (outcome == "win") {
+                userScore = userScore + 1;
+                var score = "Round " + i + ": You have won " + userScore + " rounds. And the computer has won " + computerScore + " rounds.";
+                console.log(score);}
+            
+            else if (outcome == "lose") {
+                computerScore = computerScore + 1;
+                var score = "Round " + i + ": You have won " + userScore + " rounds. And the computer has won " + computerScore + " rounds.";
+                console.log(score);}
+
+            else if (outcome == "error") {
+                i = i-1;
+                var score = "Error";
+                console.log(score);}
+
+            else {
+                i = i-1;
+                var score = "Tie, let's try again.";
+                console.log(score);}
+        }
+
+        if (userScore > computerScore) {
+            console.log("YOU WIN!") }
+        else { console.log("YOU LOSE!")}
+    }
+    
+
+    function playRound(computerSelection, userSelection) {
+
+        function getComputerChoice() {
+            function RandomX() {
+            let x = Math.random() * (3) + 0;
+            return x;}
+            
+            x = RandomX();
+
+            if (x <= 1) {computerSelection = "Rock";}
+            else if (x <= 2) {computerSelection = "Paper";}
+            else {computerSelection = "Scissors";}
+            
+            return computerSelection;
+        }
+
+
+        function capitalizeFirst (userSelection) {
+            let lower = userSelection.toLowerCase();
+            return lower[0].toUpperCase() + lower.slice(1);
+            }
+
+        userSelection = prompt ("What do you throw?");
+        userSelection = (capitalizeFirst(userSelection));
+        
+        console.log("You throw " + userSelection);
+        console.log("Computer throws " + getComputerChoice());
+
+    const tie = "tie"; //= "It's a tie! Try Again.";
+    const win = "win"; //= "You win! " + userSelection + " beats " + computerSelection + ".";
+    const lose = "lose"; //= "You lose. " + computerSelection + " beats " + userSelection + ".";
+    const error = "error"; //= "Nice try. That's not an option!";
+
+     if (computerSelection === userSelection) { 
+         return tie;}
+
+     else if (computerSelection == "Rock" && userSelection == "Paper") {
+         return win;}
+
+     else if (computerSelection == "Paper" && userSelection == "Scissors") {
+         return win;}
+
+     else if (computerSelection == "Scissors" && userSelection == "Rock"){
+         return win;}
+    
+     else if (userSelection == "Rock" && computerSelection == "Paper") {
+         return lose;}
+
+     else if (userSelection == "Paper" && computerSelection == "Scissors") {
+         return lose;}
+
+     else if (userSelection == "Scissors" && computerSelection == "Rock"){
+         return lose;}
+    
+     else {
+        return error;} 
+      
+ }    
+   
+    </script>
+   
+
+</body>
+
+</html> 
