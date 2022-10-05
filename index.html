@@ -5,20 +5,20 @@
     <title>Rock Paper Scissors</title>
     
 </header>
-
 <body>
-
     <script>
 
-console.log(game());
+    console.log(game());
 
-
+    // 5-MATCH GAME 
     function game(computerScore, userScore, score) {
-
+        
         var userScore = 0;
         var computerScore = 0;
 
+        // RUN for 5 MATCHES  
         for (let i=1; i<=5; i++) {
+
             let outcome = playRound();
 
             if (outcome == "win") {
@@ -33,23 +33,25 @@ console.log(game());
 
             else if (outcome == "error") {
                 i = i-1;
-                var score = "Error";
+                var score = "Hmm, something went wrong. Try again.";
                 console.log(score);}
 
             else {
                 i = i-1;
-                var score = "Tie, let's try again.";
+                var score = "Tie. Try again.";
                 console.log(score);}
         }
 
+        // REPORT FINAL WINNER
         if (userScore > computerScore) {
             console.log("YOU WIN!") }
         else { console.log("YOU LOSE!")}
     }
     
-
+    // SINGLE ROUND 
     function playRound(computerSelection, userSelection) {
 
+        // GET Computer's Random MOVE
         function getComputerChoice() {
             function RandomX() {
             let x = Math.random() * (3) + 0;
@@ -64,47 +66,41 @@ console.log(game());
             return computerSelection;
         }
 
+        // GET User's Prompted MOVE
+        userSelection = prompt ("What do you throw?");
 
+        // STANDARDIZE User's MOVE 
         function capitalizeFirst (userSelection) {
             let lower = userSelection.toLowerCase();
             return lower[0].toUpperCase() + lower.slice(1);
             }
-
-        userSelection = prompt ("What do you throw?");
         userSelection = (capitalizeFirst(userSelection));
-        
-        console.log("You throw " + userSelection);
-        console.log("Computer throws " + getComputerChoice());
 
-    const tie = "tie"; //= "It's a tie! Try Again.";
-    const win = "win"; //= "You win! " + userSelection + " beats " + computerSelection + ".";
-    const lose = "lose"; //= "You lose. " + computerSelection + " beats " + userSelection + ".";
-    const error = "error"; //= "Nice try. That's not an option!";
 
+        // REPORT MOVES
+        console.log("You: " + userSelection);
+        console.log("Computer: " + getComputerChoice());
+
+    // ASSESS OUTCOME 
      if (computerSelection === userSelection) { 
-         return tie;}
+        return "tie";}
 
-     else if (computerSelection == "Rock" && userSelection == "Paper") {
-         return win;}
-
-     else if (computerSelection == "Paper" && userSelection == "Scissors") {
-         return win;}
-
-     else if (computerSelection == "Scissors" && userSelection == "Rock"){
-         return win;}
+     else if (
+        (computerSelection == "Rock" && userSelection == "Paper") || 
+        (computerSelection == "Paper" && userSelection == "Scissors") ||
+        (computerSelection == "Scissors" && userSelection == "Rock")) {
+        return "win";
+    }
     
-     else if (userSelection == "Rock" && computerSelection == "Paper") {
-         return lose;}
-
-     else if (userSelection == "Paper" && computerSelection == "Scissors") {
-         return lose;}
-
-     else if (userSelection == "Scissors" && computerSelection == "Rock"){
-         return lose;}
+     else if (
+        (userSelection == "Rock" && computerSelection == "Paper") || 
+        (userSelection == "Paper" && computerSelection == "Scissors") || 
+        (userSelection == "Scissors" && computerSelection == "Rock")){
+        return "lose";
+    }
     
      else {
-        return error;} 
-      
+        return "error";} 
  }    
    
     </script>
